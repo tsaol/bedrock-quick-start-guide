@@ -1,7 +1,7 @@
 # AWS Bedrock Quick Start Guide 快速上手指南
 欢迎使用AWS Bedrock快速上手指南。本指南提供了如何快速设置和开始使用AWS Bedrock的说明以及必要的代码。
-如果你需要更多的功能以及了解更多的细节，请参考AWS官方文档
 
+如果你需要更多的功能以及了解更多的细节，请参考AWS官方文档
 [AWS Bedrock Official Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
 
 ## 前置条件
@@ -13,7 +13,7 @@ pip install boto3>=1.28.59
 ## 代码
 以下是一段可以快速执行的python代码
 
-'''
+```
 import boto3
 import json
 
@@ -43,10 +43,8 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-'''
+```
 
 
 ## License
-This project is licensed under the [MIT License](LICENSE).
 Thank you for using AWS Bedrock!
