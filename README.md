@@ -46,5 +46,5 @@ if __name__ == '__main__':
 ```
 
 
-## License
+## Thanks
 Thank you for using AWS Bedrock!
