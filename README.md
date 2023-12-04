@@ -45,8 +45,8 @@ if __name__ == '__main__':
     main()
 ```
 
-* 以上是直接响应的代码`/pytho/bedrock_101.py`，
-* 如果大模型生成的内容比较长，可以参考`/pytho/bedrock_201.py`, 这是一个流式的返回
+* 以上是直接响应的代码 `/python/bedrock_101.py`
+* 如果大模型生成的内容比较长，采用流式的返回。可以参考 `/python/bedrock_201.py`, 
 
 
 ## Thanks
