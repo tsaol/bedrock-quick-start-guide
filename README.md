@@ -12,6 +12,7 @@ pip install boto3>=1.28.59
 
 ## 代码
 以下是一段可以快速执行的python代码
+这是一段直接相应的代码`/pytho/bedrock_101.py`，如果大模型生成的内容比较长，可以参考`/pytho/bedrock_201.py`, 这是一个流式的返回
 
 ```
 import boto3
