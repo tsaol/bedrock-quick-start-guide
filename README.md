@@ -30,8 +30,8 @@ def main():
     print('input is %s' % input)
     #组装body
     body = json.dumps({"prompt": input, "max_tokens_to_sample": 800, "temperature": 1, "top_p": 0.99, "top_k": 250})
-    #https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids-arns.html
-    #模型ID
+    # https://docs.aws.amazon.com/zh_cn/bedrock/latest/userguide/model-ids.html
+    #bedrock通过在这里输入不同的模型ID，来切换模型
     modelId = 'anthropic.claude-v2'
     accept = 'application/json'
     contentType = 'application/json'
