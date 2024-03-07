@@ -12,7 +12,8 @@ def main():
     '''
     print('input is %s' % input)
     body = json.dumps({"prompt": input, "max_tokens_to_sample": 800, "temperature": 1, "top_p": 0.99, "top_k": 250})
-    #https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids-arns.html
+    # 通过以下页面选择modelid,应用不同的模型
+    # https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html
     modelId = 'anthropic.claude-v2'
     accept = 'application/json'
     contentType = 'application/json'
