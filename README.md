@@ -8,12 +8,13 @@
 
 ## 前置条件
 在代码的运营环境安装boto3 (注意boto3 版本需要在1.28.59以上)
+``` bash
+pip install boto3 >=1.28.59
 ```
-pip install boto3>=1.28.59
-```
+
 ## Claude3 代码 
 以下是一段可以快速执行的Claude3 python代码
-```
+``` python
 bedrock_runtime = boto3.client(service_name='bedrock-runtime', region_name='us-east-1', aws_access_key_id='ACCESS_KEY',
     aws_secret_access_key='SECRET_KEY')
     
@@ -115,7 +116,7 @@ if __name__ == '__main__':
 
 * 以上是直接响应的代码 `/python/bedrock_101.py`
 * 如果大模型生成的内容比较长，采用流式的返回。可以参考 `/python/bedrock_201.py`, 
-
+* 如果需要做Claude2 到Claude3 的提示词转换，请使用 https://github.com/aws-samples/amazon-bedrock-prompting/blob/main/others/messages_converter.py
 
 ## Thanks
 Thank you for using AWS Bedrock!
