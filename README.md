@@ -9,9 +9,54 @@
 ```
 pip install boto3>=1.28.59
 ```
+## Claude3 代码 
+以下是一段可以快速执行的Claude3 python代码
+```
+bedrock_runtime = boto3.client(service_name='bedrock-runtime', region_name='us-east-1', aws_access_key_id='ACCESS_KEY',
+    aws_secret_access_key='SECRET_KEY')
+    
+payload = {
+    "modelId": "anthropic.claude-3-sonnet-20240229-v1:0",
+    "contentType": "application/json",
+    "accept": "application/json",
+    "body": {
+        "anthropic_version": "bedrock-2023-05-31",
+        "max_tokens": 1000,
+        "messages": [
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "告诉我你是谁"
+                    }
+                ]
+            }
+        ]
+    }
+}
 
-## 代码
-以下是一段可以快速执行的python代码
+
+body_bytes = json.dumps(payload['body']).encode('utf-8')
+
+response = bedrock_runtime.invoke_model(
+    body=body_bytes,
+    contentType=payload['contentType'],
+    accept=payload['accept'],
+    modelId=payload['modelId']
+)
+
+
+response_body = response['body'].read().decode('utf-8')
+print(response_body)
+
+```
+* 是使用Claude3文生文的参考代码 `/python/bedrock_claude3.py`
+* 是使用Claude3图片视觉的参考代码（多模态）  `/python/bedrock_claude3_vision.py`
+
+
+## Claude2 代码 
+以下是一段可以快速执行的Claude2 python代码
 
 ```
 import boto3
