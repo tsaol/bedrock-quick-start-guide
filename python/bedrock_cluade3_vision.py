@@ -2,6 +2,7 @@ import boto3
 import json
 import base64
 
+#多模态需要将文件以base64的形式输入给大模型
 with open("aws.png", "rb") as image_file:
     encoded_string = base64.b64encode(image_file.read())
     base64_string = encoded_string.decode('utf-8')
@@ -9,7 +10,7 @@ with open("aws.png", "rb") as image_file:
 # Create a BedrockRuntime client
 bedrock_runtime = boto3.client(service_name='bedrock-runtime', region_name='us-east-1', aws_access_key_id='ACCESS_KEY',
     aws_secret_access_key='SECRET_KEY')
-    
+
 payload = {
     "modelId": "anthropic.claude-3-sonnet-20240229-v1:0",
     "contentType": "application/json",
