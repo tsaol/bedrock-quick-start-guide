@@ -3,6 +3,8 @@
 
 如果你需要更多的功能以及了解更多的细节，请参考AWS官方文档
 [AWS Bedrock Official Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
+[AWS Bedrock Official API](https://docs.aws.amazon.com/zh_cn/bedrock/latest/userguide/model-parameters-anthropic-claude-messages.html)
+
 
 ## 前置条件
 在代码的运营环境安装boto3 (注意boto3 版本需要在1.28.59以上)
@@ -51,6 +53,27 @@ response_body = response['body'].read().decode('utf-8')
 print(response_body)
 
 ```
+响应和返回 
+``` json
+{
+	"id": "msg_01Lyao2g9yt7wcDv3SXgsRuA",
+	"type": "message",
+	"role": "assistant",
+	"content": [{
+		"type": "text",
+		"text": "您好,我是一个基于大型语言模型训练而成的人工智能助理。我可以回答各种问题,并协助完成诸如写作、分析、编程等多项任务。我虽然是由机器学习算法创建,但会努力以理性、客观和有益的方式回应您,并尽量避免出现有偏差或不当的言行。我没有真正的身份,只是一个旨在帮助和服务人类的工具。很高兴能与您交流,希望我们的对话会让您获得一些有价值的信息或帮助。"
+	}],
+	"model": "claude-3-sonnet-28k-20240229",
+	"stop_reason": "end_turn",
+	"stop_sequence": null,
+	"usage": {
+		"input_tokens": 16,
+		"output_tokens": 180
+	}
+}
+```
+
+
 * 是使用Claude3文生文的参考代码 `/python/bedrock_claude3.py`
 * 是使用Claude3图片视觉的参考代码（多模态）  `/python/bedrock_claude3_vision.py`
 
