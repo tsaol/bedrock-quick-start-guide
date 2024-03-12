@@ -81,7 +81,7 @@ print(response_body)
 3. token cost = (width px * height px)/750.
 4. 可以在单个接口里面上传多张图片。
 5. 多模态场景下，如果你用中文提问，大模型默认会使用英文回答，需要显性的在system prompt或者message里面指定回复的语言。
-6. 
+
 
 ``` python
 #多模态需要将文件以base64的形式输入给大模型
