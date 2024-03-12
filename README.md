@@ -12,7 +12,7 @@
 pip install boto3 >=1.28.59
 ```
 
-## Claude3 代码 
+## Claude3 代码 （文生文）
 以下是一段可以快速执行的Claude3 python代码
 ``` python
 bedrock_runtime = boto3.client(service_name='bedrock-runtime', region_name='us-east-1', aws_access_key_id='ACCESS_KEY',
@@ -74,6 +74,74 @@ print(response_body)
 }
 ```
 
+## Claude3 代码 （多模态）
+
+1. 应用视觉能力，需要将文件以base64的形式输入作为input给到大模型。
+2. 支持的图片格式目前包括  JPEG, PNG, GIF以及 WebP。
+3. token cost = (width px * height px)/750.
+4. 可以在单个接口里面上传多张图片。
+5. 多模态场景下，如果你用中文提问，大模型默认会使用英文回答，需要显性的在system prompt或者message里面指定回复的语言。
+6. 
+
+``` python
+bedrock_runtime = boto3.client(service_name='bedrock-runtime', region_name='us-east-1', aws_access_key_id='ACCESS_KEY',
+    aws_secret_access_key='SECRET_KEY')
+    
+payload = {
+    "modelId": "anthropic.claude-3-sonnet-20240229-v1:0",
+    "contentType": "application/json",
+    "accept": "application/json",
+    "body": {
+        "anthropic_version": "bedrock-2023-05-31",
+        "max_tokens": 1000,
+        "messages": [
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "告诉我你是谁"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+
+body_bytes = json.dumps(payload['body']).encode('utf-8')
+
+response = bedrock_runtime.invoke_model(
+    body=body_bytes,
+    contentType=payload['contentType'],
+    accept=payload['accept'],
+    modelId=payload['modelId']
+)
+
+
+response_body = response['body'].read().decode('utf-8')
+print(response_body)
+
+```
+响应和返回 
+``` json
+{
+	"id": "msg_01Lyao2g9yt7wcDv3SXgsRuA",
+	"type": "message",
+	"role": "assistant",
+	"content": [{
+		"type": "text",
+		"text": "您好,我是一个基于大型语言模型训练而成的人工智能助理。我可以回答各种问题,并协助完成诸如写作、分析、编程等多项任务。我虽然是由机器学习算法创建,但会努力以理性、客观和有益的方式回应您,并尽量避免出现有偏差或不当的言行。我没有真正的身份,只是一个旨在帮助和服务人类的工具。很高兴能与您交流,希望我们的对话会让您获得一些有价值的信息或帮助。"
+	}],
+	"model": "claude-3-sonnet-28k-20240229",
+	"stop_reason": "end_turn",
+	"stop_sequence": null,
+	"usage": {
+		"input_tokens": 16,
+		"output_tokens": 180
+	}
+}
+```
 
 * 是使用Claude3文生文的参考代码 `/python/bedrock_claude3.py`
 * 是使用Claude3图片视觉的参考代码（多模态）  `/python/bedrock_claude3_vision.py`
@@ -82,7 +150,7 @@ print(response_body)
 ## Claude2 代码 
 以下是一段可以快速执行的Claude2 python代码
 
-```
+``` python
 import boto3
 import json
 
@@ -113,6 +181,10 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
+
+
+
 
 * 以上是直接响应的代码 `/python/bedrock_101.py`
 * 如果大模型生成的内容比较长，采用流式的返回。可以参考 `/python/bedrock_201.py`, 
