@@ -16,6 +16,8 @@ outputDataConfig=({
     }
 })
 
+# https://docs.aws.amazon.com/zh_cn/bedrock/latest/userguide/batch-inference-supported.html
+
 response = bedrock.create_model_invocation_job(
     roleArn="arn:aws:iam::123456789012:role/MyBatchInferenceRole",  
     modelId="amazon.titan-text-express-v1",
