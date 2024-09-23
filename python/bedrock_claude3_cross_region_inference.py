@@ -1,8 +1,8 @@
 """
-文件名: bedrock_claude3_inference.py
+文件名: bedrock_claude3_cross_region_inference.py
 作者: Cao Liu
 创建日期: 9/18/2024
-最后修改日期: 9/18/2024
+最后修改日期: 9/23/2024
 
 描述:
 这个脚本用户展示如何进行bedrock 的跨区域推理
