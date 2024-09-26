@@ -23,7 +23,7 @@ payload = {
                 "content": [
                     {
                         "type": "text",
-                        "text": "分析这个链接给出300字总结 https://aws.amazon.com/cn/blogs/china/anthropics-claude-3-sonnet-foundation-model-is-now-available-in-amazon-bedrock/"
+                        "text": "给我创作一首周杰伦风格的歌-铁拳"
                     }
                 ]
             }
