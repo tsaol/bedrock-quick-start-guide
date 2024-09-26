@@ -3,3 +3,5 @@
 assets/.DS_Store
 *.mod
 *.sum
+/nodejs/node_modules
+nodejs/package-lock.json
