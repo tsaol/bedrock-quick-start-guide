@@ -125,53 +125,30 @@ payload = {
 
 ```
 
-
 * 是使用Claude3文生文的参考代码 `/python/bedrock_claude3.py`
 * 是使用Claude3图片视觉的参考代码（多模态）  `/python/bedrock_claude3_vision.py`
 
 
-## Claude2 代码 
-以下是一段可以快速执行的Claude2 python代码
+## Marketplace 模型使用
+AWS Bedrock Marketplace 提供了多种第三方模型供选择。以下是使用 Marketplace 上 DeepSeek 模型的示例：
 
-``` python
-import boto3
-import json
+* DeepSeek 模型调用示例 `/python/bedrock_marketplace_deepseek.py`
+  - 支持多种聊天模板格式 (LLAMA, QWEN, DEEPSEEK)
+  - 提供格式化提示词功能
+  - 包含参数控制（max_tokens, temperature, top_p等）
 
-bedrock_client = boto3.client(service_name='bedrock-runtime', region_name='us-east-1', aws_access_key_id='ACCESS_KEY',
-    aws_secret_access_key='SECRET_KEY')
+## Mistral 模型使用
+AWS Bedrock 提供了 Mistral 系列模型的访问。示例代码：
 
+* Mistral 模型调用示例 `/python/bedrock_mistral.py`
 
-def main():
-    #提示词
-    input = '''
-        \n\nHuman: who are you
-        \n\nAssistant:
-    '''
-    print('input is %s' % input)
-    #组装body
-    body = json.dumps({"prompt": input, "max_tokens_to_sample": 800, "temperature": 1, "top_p": 0.99, "top_k": 250})
-    # https://docs.aws.amazon.com/zh_cn/bedrock/latest/userguide/model-ids.html
-    #bedrock通过在这里输入不同的模型ID，来切换模型
-    modelId = 'anthropic.claude-v2'
-    accept = 'application/json'
-    contentType = 'application/json'
+## 跨区域推理
+AWS Bedrock 支持跨区域模型推理，可以使用预配置的推理配置文件来实现：
 
-    response = bedrock_client.invoke_model(body=body, modelId=modelId, accept=accept, contentType=contentType)
-    response_body = json.loads(response.get('body').read())
-    print('response_body is %s' % response_body.get('completion'))
-
-
-if __name__ == '__main__':
-    main()
-```
-
-
-
-
-
-* 以上是直接响应的代码 `/python/bedrock_101.py`
-* 如果大模型生成的内容比较长，采用流式的返回。可以参考 `/python/bedrock_201.py`, 
-* 如果需要做Claude2 到Claude3 的提示词转换，请使用 https://github.com/aws-samples/amazon-bedrock-prompting/blob/main/others/messages_converter.py
+* 跨区域推理示例 `/python/bedrock_claude3_cross_region_inference.py`
+  - 使用预配置的推理配置文件
+  - 支持不同区域的模型 ARN
+  - 通过统一的模型标识符进行调用
 
 ## Thanks
 Thank you for using AWS Bedrock!
