@@ -28,12 +28,13 @@ from enum import Enum
 # replace with your region
 region_name = "us-west-2"  
 # replace with your model ARN
-model_id = "arn:aws:sagemaker:us-west-2:xxx:endpoint/endpoint-bk-mp-qwen-7b"
+model_id = "arn:aws:sagemaker:us-west-2:xxx:endpoint/endpoint-quick-bd-mp-llama-8b"  
+# model_id = "arn:aws:sagemaker:us-west-2:xxx:endpoint/endpoint-bk-mp-qwen-7b-cls"
 bedrock_runtime = boto3.client("bedrock-runtime", region_name= region_name)
 
 def invoke_deepseek_model(prompt, max_tokens=1000, temperature=0.6, top_p=0.9, stream=False):
     # Format prompt with unified template
-    formatted_prompt = f"""<|begin_of_sentence|><|User|>{prompt}<|Assistant|>"""
+    formatted_prompt = f"""<｜begin_of_sentence｜><｜User｜> {prompt} <｜Assistant｜>"""
 
     # Prepare model input
     request_body = {
