@@ -38,12 +38,15 @@ def claude_reasoning():
     system_prompt = "You are a smart assistant."
 
     # Define the test query for demonstrating multi-step reasoning
-    user_query = "tell me who are you?"
+    user_query = "输出《咏鹅》100 遍，并在每一次输出中打上计数tag，不可以少输出"
+    
+
 
     # Prepare the request payload with model parameters
     body = json.dumps({
         "anthropic_version": "bedrock-2023-05-31",
-        "max_tokens": 4000,
+        "anthropic_beta": ["output-128k-2025-02-19"],
+        "max_tokens": 81920,
         "thinking": {
             "type": "enabled",
             "budget_tokens": 2000,
@@ -59,7 +62,6 @@ def claude_reasoning():
     response = bedrock.invoke_model(
         body=body,
         modelId=model_id,
-        accept='application/json',
         contentType='application/json'
     )
 
@@ -82,6 +84,24 @@ def claude_reasoning():
     for content in response_body['content']:
         if content['type'] == 'text':
             print(content['text'])
+
+    # # 发起流式请求（移除 headers 参数）
+    # response = bedrock.invoke_model_with_response_stream(
+    #     modelId=model_id,
+    #     body=body,
+    # )
+
+    # stream = response.get("body")
+    # if stream:
+    #     for event in stream:
+    #         chunk = event.get("chunk")
+    #         if chunk:
+    #             # Print the response chunk
+    #             chunk_json = json.loads(chunk.get("bytes").decode())
+    #             print(chunk_json)
+    # else:
+    #     print("No response stream received.")
+
 
 if __name__ == "__main__":
     claude_reasoning()
