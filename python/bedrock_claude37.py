@@ -67,13 +67,17 @@ def claude_reasoning():
     
     # Display the model's step-by-step reasoning process with tags
     print("Reasoning Process:")
+    thinking_output = ""
     for content in response_body['content']:
         if content['type'] == 'thinking':
-            print(f"[{content.get('tag', 'thinking')}]")  # Show the thinking step tag
-            print(content['thinking'])
+            thinking_output += content['thinking']
+
+    # 在输出中添加 XML 标签
+    xml_output = f"<thinking>{thinking_output}</thinking>"
+    print(xml_output)
     
     # Display the model's final response
-    print("\n Final Answer:")
+    print("\n  ------ Final Answer: ------\n")
     for content in response_body['content']:
         if content['type'] == 'text':
             print(content['text'])
