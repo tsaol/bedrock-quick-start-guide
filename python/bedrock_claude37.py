@@ -5,6 +5,7 @@
 最后修改日期: 2025-03-17
 
 描述：演示如何使用  Bedrock Claude 3.7 Sonnet 模型进行推理
+
 功能：
     - 使用 Claude 3.7 Sonnet 模型进行文本生成
     - 展示模型的思考过程和最终答案
@@ -72,7 +73,7 @@ def claude_reasoning():
         if content['type'] == 'thinking':
             thinking_output += content['thinking']
 
-    # 在输出中添加 XML 标签
+    # add <thinking> tag
     xml_output = f"<thinking>{thinking_output}</thinking>"
     print(xml_output)
     
