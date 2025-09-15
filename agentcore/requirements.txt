@@ -1,0 +1,4 @@
+# AWS Bedrock AgentCore  依赖
+bedrock-agentcore
+boto3>=1.26.0
+botocore>=1.29.0
