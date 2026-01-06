@@ -154,9 +154,12 @@ class RetrievalDemo:
 
                 print(f"  语义记忆: {fact_count} 条, 偏好记忆: {pref_count} 条")
 
+                # 显示语义记忆结果（带 score）
                 if facts:
-                    content = extract_content(facts[0])
-                    print(f"  -> {content[:50]}...")
+                    for i, fact in enumerate(facts[:2], 1):
+                        content = extract_content(fact)
+                        score = fact.get('score', 0)
+                        print(f"  [{i}] score: {score:.4f} | {content[:40]}...")
 
             except Exception as e:
                 print(f"  [-] 失败: {e}")
@@ -176,7 +179,7 @@ class RetrievalDemo:
             print(f"\n{name} ({namespace}):")
             try:
                 records = self.client.list_memory_records(
-                    memory_id=self.memory_id,
+                    memoryId=self.memory_id,
                     namespace=namespace
                 )
 
@@ -184,7 +187,9 @@ class RetrievalDemo:
                     print(f"  [+] 找到 {len(records)} 条记忆")
                     for i, record in enumerate(records[:2], 1):
                         content = extract_content(record)
-                        print(f"    {i}. {content[:50]}...")
+                        score = record.get('score', 'N/A')
+                        score_str = f"{score:.4f}" if isinstance(score, float) else score
+                        print(f"    {i}. [score: {score_str}] {content[:40]}...")
                 else:
                     print("  [!] 未找到记忆")
 
@@ -202,7 +207,7 @@ def print_comparison():
 ├──────────────────────┼──────────────────────┼───────────────────┤
 │ list_events()        │ 获取所有原始事件     │ 完整、按时间排序   │
 │ get_last_k_turns()   │ 获取最近K轮对话      │ 快速、适合上下文   │
-│ retrieve_memories()  │ 语义搜索相关记忆     │ 智能、相关性排序   │
+│ retrieve_memories()  │ 语义搜索相关记忆     │ 智能、带score分数  │
 │ list_memory_records()│ 列出所有长期记忆     │ 完整、按命名空间   │
 └──────────────────────┴──────────────────────┴───────────────────┘
 
