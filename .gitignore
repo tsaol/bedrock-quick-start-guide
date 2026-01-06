@@ -5,3 +5,6 @@ assets/.DS_Store
 *.sum
 /nodejs/node_modules
 nodejs/package-lock.json
+__pycache__/
+.venv/
+*.pyc
